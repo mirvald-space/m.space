@@ -7,6 +7,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import Footer from "./components/footer";
 import { ThemeProvider } from "./components/theme-switch";
 import { metaData } from "./config";
+import Script from "next/script";
 
 const psans = Public_Sans({ subsets: ["latin"]});
 
@@ -73,6 +74,11 @@ export default function RootLayout({
           type="application/feed+json"
           href="/feed.json"
           title="JSON Feed"
+        />
+        <Script
+          defer
+          src="https://cloud.umami.is/script.js"
+          data-website-id="8c0b0c02-e585-4a01-a436-76517e89d9e2"
         />
       </head>
       <body className="antialiased flex flex-col items-center justify-center mx-auto mt-2 lg:mt-8 mb-20 lg:mb-40">
