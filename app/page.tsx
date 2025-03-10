@@ -1,10 +1,11 @@
 import Image from "next/image";
 import { socialLinks } from "./config";
+import Link from "next/link";
 
 export default function Page() {
   return (
     <section>
-      <a href={socialLinks.twitter} target="_blank">
+      <Link href={socialLinks.twitter} target="_blank">
         <Image
           src="/profile.png"
           alt="Profile photo"
@@ -14,7 +15,7 @@ export default function Page() {
           height={160}
           priority
         />
-      </a>
+      </Link>
 
 
       <h1 className="mb-8 text-2xl font-medium tracking-tight">
@@ -28,7 +29,7 @@ export default function Page() {
         🎨 DESIGN: Research-driven UX/UI for fintech, EdTech & SaaS (Figma, design systems, wireframes) {""}
           <a
             target="_blank"
-            href="https://github.com/1msirius/Nextfolio?tab=readme-ov-file#features"
+            href="#"
           >
             more
           </a>
