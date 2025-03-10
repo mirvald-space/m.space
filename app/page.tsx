@@ -23,20 +23,14 @@ export default function Page() {
       </h1>
       <div className="prose prose-neutral dark:prose-invert">
         <p>
-        I create end-to-end digital products that combine design excellence with automation power:
+        I create <strong>end-to-end digital products</strong> that combine design excellence with automation power:
         </p>
         <p>
-        🎨 DESIGN: Research-driven UX/UI for fintech, EdTech & SaaS (Figma, design systems, wireframes) {""}
-          <a
-            target="_blank"
-            href="#"
-          >
-            more
-          </a>
+        🎨 DESIGN: <strong>Research-driven UX/UI </strong>for fintech, EdTech & SaaS (Figma, design systems, wireframes)
           .
         </p>
-        <p>🤖 DEVELOPMENT: Telegram bots with AI integration, web scrapers, workflow automation (Python, Aiogram)</p>
-        <p>My dual expertise delivers complete solutions — beautiful interfaces backed by intelligent automation that increases metrics by 15-30% while reducing manual operations by 90%.</p>
+        <p>🤖 DEVELOPMENT: <strong>Telegram bots with AI integration</strong>, web scrapers, workflow automation (Python, Aiogram)</p>
+        <p>My dual expertise delivers complete solutions — beautiful interfaces backed by intelligent automation that <strong>increases metrics by 15-30%</strong> while <strong>reducing manual operations by 90%.</strong></p>
         <p>Let's build something exceptional together!</p>
 
       </div>
