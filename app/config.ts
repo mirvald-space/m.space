@@ -4,7 +4,7 @@ export const metaData = {
   name: "Vadym",
   ogImage: "/opengraph-image.png",
   description:
-    "A clean, fast, and lightweight portfolio template built with Next.js, Vercel, and Tailwind CSS for optimal performance.",
+    "Product designer and Python developer. I create effective digital solutions with AI integration, focusing on user experience and automation.",
 };
 
 export const socialLinks = {
