@@ -56,48 +56,57 @@ export async function generateMetadata({
 }
 
 export default async function Blog({ params }) {
-  const { slug } = await params;
-  let post = getBlogPosts().find((post) => post.slug === slug);
+  try {
+    const { slug } = await params;
+    let post = getBlogPosts().find((post) => post.slug === slug);
 
-  if (!post) {
-    notFound();
+    if (!post) {
+      notFound();
+    }
+
+    // Отладочная информация
+    console.log("Post metadata:", post.metadata);
+    console.log("Post content first 100 chars:", post.content.substring(0, 100));
+
+    return (
+      <section>
+        <script
+          type="application/ld+json"
+          suppressHydrationWarning
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BlogPosting",
+              headline: post.metadata.title,
+              datePublished: post.metadata.publishedAt,
+              dateModified: post.metadata.publishedAt,
+              description: post.metadata.summary,
+              image: post.metadata.image
+                ? `${metaData.baseUrl}${post.metadata.image}`
+                : `/og?title=${encodeURIComponent(post.metadata.title)}`,
+              url: `${metaData.baseUrl}/blog/${post.slug}`,
+              author: {
+                "@type": "Person",
+                name: metaData.name,
+              },
+            }),
+          }}
+        />
+        <h1 className="title mb-3 font-medium text-2xl tracking-tight">
+          {post.metadata.title}
+        </h1>
+        <div className="flex justify-between items-center mt-2 mb-8 text-medium">
+          <p className="text-sm text-neutral-600 dark:text-neutral-400">
+            {formatDate(post.metadata.publishedAt)}
+          </p>
+        </div>
+        <article className="prose prose-quoteless prose-neutral dark:prose-invert">
+          <CustomMDX source={post.content} />
+        </article>
+      </section>
+    );
+  } catch (error) {
+    console.error("Error in Blog component:", error);
+    return <div>Error rendering blog: {error?.message || String(error)}</div>;
   }
-
-  return (
-    <section>
-      <script
-        type="application/ld+json"
-        suppressHydrationWarning
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BlogPosting",
-            headline: post.metadata.title,
-            datePublished: post.metadata.publishedAt,
-            dateModified: post.metadata.publishedAt,
-            description: post.metadata.summary,
-            image: post.metadata.image
-              ? `${metaData.baseUrl}${post.metadata.image}`
-              : `/og?title=${encodeURIComponent(post.metadata.title)}`,
-            url: `${metaData.baseUrl}/blog/${post.slug}`,
-            author: {
-              "@type": "Person",
-              name: metaData.name,
-            },
-          }),
-        }}
-      />
-      <h1 className="title mb-3 font-medium text-2xl tracking-tight">
-        {post.metadata.title}
-      </h1>
-      <div className="flex justify-between items-center mt-2 mb-8 text-medium">
-        <p className="text-sm text-neutral-600 dark:text-neutral-400">
-          {formatDate(post.metadata.publishedAt)}
-        </p>
-      </div>
-      <article className="prose prose-quoteless prose-neutral dark:prose-invert">
-        <CustomMDX source={post.content} />
-      </article>
-    </section>
-  );
 }
