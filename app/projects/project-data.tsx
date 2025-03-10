@@ -7,27 +7,27 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    title: "Holyheld - One Card for All Crypto Natives",
+    title: "Holyheld ",
     year: 2024,
-    description: "Open science AI resarch lab",
+    description: "One Card for All Crypto Natives",
     url: "http://holyheld.com",
   },
   {
-    title: "MOU - Your Guide to Ukrainian Medicine",
+    title: "MOU",
     year: 2023,
-    description: "Open source AI education resources",
+    description: "Your Guide to Ukrainian Medicine",
     url: "https://mou.today",
   },
   {
-    title: "Omyki - Your Ultimate Remote Key Solution",
+    title: "Omyki",
     year: 2023,
-    description: "Open source AI education resources",
-    url: "https://opendeeplearning.xyz/",
+    description: "Your Ultimate Remote Key Solution",
+    url: "#",
   },
   {
-    title: "Sub&Earn - Monetize Your Social Media Presence",
+    title: "Sub&Earn",
     year: 2023,
-    description: "Open source AI education resources",
-    url: "https://opendeeplearning.xyz/",
+    description: "Monetize Your Social Media Presence",
+    url: "#",
   },
 ];
