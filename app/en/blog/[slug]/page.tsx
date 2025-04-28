@@ -5,22 +5,18 @@ import { formatDate, getBlogPosts } from "app/lib/posts";
 import { metaData } from "app/config";
 
 export async function generateStaticParams() {
-  let posts = getBlogPosts();
-
+  let posts = getBlogPosts('en');
   return posts.map((post) => ({
     slug: post.slug,
   }));
 }
 
-export async function generateMetadata({
-  params,
-}): Promise<Metadata | undefined> {
+export async function generateMetadata({ params }): Promise<Metadata | undefined> {
   const { slug } = await params;
-  let post = getBlogPosts().find((post) => post.slug === slug);
+  let post = getBlogPosts('en').find((post) => post.slug === slug);
   if (!post) {
     return;
   }
-
   let {
     title,
     publishedAt: publishedTime,
@@ -30,7 +26,6 @@ export async function generateMetadata({
   let ogImage = image
     ? image
     : `${metaData.baseUrl}/og?title=${encodeURIComponent(title)}`;
-
   return {
     title,
     description,
@@ -39,7 +34,7 @@ export async function generateMetadata({
       description,
       type: "article",
       publishedTime,
-      url: `${metaData.baseUrl}/blog/${post.slug}`,
+      url: `${metaData.baseUrl}/en/blog/${post.slug}`,
       images: [
         {
           url: ogImage,
@@ -58,16 +53,12 @@ export async function generateMetadata({
 export default async function Blog({ params }) {
   try {
     const { slug } = await params;
-    let post = getBlogPosts().find((post) => post.slug === slug);
-
+    let post = getBlogPosts('en').find((post) => post.slug === slug);
     if (!post) {
       notFound();
     }
-
-    // Отладочная информация
-    console.log("Post metadata:", post.metadata);
-    console.log("Post content first 100 chars:", post.content.substring(0, 100));
-
+    // Проверяем, есть ли украинская версия
+    const hasUkr = getBlogPosts('uk').some((p) => p.slug === slug);
     return (
       <section>
         <script
@@ -84,7 +75,7 @@ export default async function Blog({ params }) {
               image: post.metadata.image
                 ? `${metaData.baseUrl}${post.metadata.image}`
                 : `/og?title=${encodeURIComponent(post.metadata.title)}`,
-              url: `${metaData.baseUrl}/blog/${post.slug}`,
+              url: `${metaData.baseUrl}/en/blog/${post.slug}`,
               author: {
                 "@type": "Person",
                 name: metaData.name,
@@ -99,13 +90,12 @@ export default async function Blog({ params }) {
           <p className="text-sm text-neutral-600 dark:text-neutral-400">
             {formatDate(post.metadata.publishedAt)}
           </p>
-          {/* Переключатель языка */}
-          {getBlogPosts('en').some((p) => p.slug === slug) && (
+          {hasUkr && (
             <a
-              href={`/en/blog/${slug}`}
+              href={`/blog/${slug}`}
               className="text-xs underline text-blue-600 hover:text-blue-800 ml-4"
             >
-              Read in English
+              Читати українською
             </a>
           )}
         </div>
@@ -118,4 +108,4 @@ export default async function Blog({ params }) {
     console.error("Error in Blog component:", error);
     return <div>Error rendering blog: {error?.message || String(error)}</div>;
   }
-}
+} 

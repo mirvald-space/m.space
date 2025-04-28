@@ -7,6 +7,7 @@ type Metadata = {
   summary: string;
   tags: string;
   image?: string;
+  lang?: string;
 };
 
 function parseFrontmatter(fileContent: string) {
@@ -50,8 +51,20 @@ function getMDXData(dir: string) {
   });
 }
 
-export function getBlogPosts() {
-  return getMDXData(path.join(process.cwd(), "content"));
+export function getBlogPosts(lang: string = 'en') {
+  const allPosts = getMDXData(path.join(process.cwd(), "content"));
+  // Фильтруем по языку: если lang === 'en', ищем .en.mdx или lang: 'en' в frontmatter
+  // Если lang === 'uk', берем без .en.mdx и без lang: 'en'
+  return allPosts.filter(post => {
+    if (lang === 'en') {
+      return post.slug.endsWith('.en') || post.metadata.lang === 'en';
+    } else {
+      return !post.slug.endsWith('.en') && post.metadata.lang !== 'en';
+    }
+  }).map(post => ({
+    ...post,
+    slug: post.slug.replace(/\.en$/, ''), // убираем .en из slug для английских версий
+  }));
 }
 
 export function formatDate(date: string, includeRelative = false) {

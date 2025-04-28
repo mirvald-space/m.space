@@ -1,0 +1,108 @@
+---
+title: "WebNinja: AI Assistant for Web Research"
+publishedAt: "2025-03-10"
+summary: "Introducing my hobby project WebNinja — a tool for automating web research using AI."
+tags: "AI, Python, Automation, Web Research, Hobby Project"
+lang: "en"
+---
+
+Hi! I want to share my small hobby project — WebNinja. Inspired by AI Manus (and the community's playful "anus" 😄), I decided to create my own mini-version of a web research agent.
+
+## What is it?
+
+WebNinja is a simple yet functional tool that:
+- 🤖 Uses AI (Grok or GPT-4) to analyze information
+- 🔍 Collects data from websites
+- 📊 Generates reports based on the collected data
+
+## How can it be used?
+
+**For designers:**
+- Quick analysis of design trends
+- Collecting references from various sites
+- Monitoring new things in UI/UX
+
+**For developers:**
+- Tracking tech news
+- Analyzing new tools and frameworks
+- Collecting feature implementation examples
+
+**For others:**
+- Marketing research
+- Competitor analysis
+- Monitoring news in any field
+
+## How to get started?
+
+1. Clone the repository:
+```bash
+git clone https://github.com/mirvald-space/WebNinja.git
+```
+
+2. Install dependencies:
+```bash
+python -m venv .myenv
+source .myenv/bin/activate  # for Linux/Mac
+pip install -r requirements.txt
+```
+
+3. Create a `.env` file and add your API key:
+
+GROK_API_KEY=your-key-here
+or
+OPENAI_API_KEY=your-key-here
+
+4. Run the example:
+```bash
+python examples/research_agent.py
+```
+
+## Usage examples
+
+**For designers:**
+```python
+topic = "UI design trends 2024"
+agent.research(topic, depth=3)  # Checks 3 sources
+```
+
+**For developers:**
+```python
+topic = "New features in Python 3.12"
+agent.research(topic, max_time=180)  # 3 minutes for search
+```
+
+**For marketers:**
+```python
+topic = "AI tools market analysis"
+agent.research(topic)
+```
+
+## What can you get?
+
+- 📝 Structured report with key facts
+- 🔍 Comparison of information from different sources
+- 💡 Conclusions and recommendations
+- 🌐 Links to sources for further study
+
+## Limitations
+
+Of course, this is a hobby project, so it has its limitations:
+- Works only with open sources
+- Requires an API key for AI models
+- May miss some details
+- Sometimes needs additional result verification
+
+## Where to find it?
+
+- 📦 GitHub: [github.com/mirvald-space/WebNinja](https://github.com/mirvald-space/WebNinja)
+- 📱 My Telegram: [Pixels + Code + AI ✨📟⚡️](https://t.me/+iYATkhA5NoJjYTlk)
+
+## From me
+
+I created this tool for my own needs, but I'll be glad if it helps someone else. You can use it as is or take it as a basis for your own experiments.
+
+If you're interested in the project — subscribe to my Telegram, where I share other useful stuff for designers and developers!
+
+---
+
+*P.S.: This is an experimental project, so use it with an understanding of its limitations. But for quick information gathering — it's a fully working tool! 😉* 
